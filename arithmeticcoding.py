@@ -311,6 +311,7 @@ class FlatFrequencyTable(FrequencyTable):
 		if 0 <= symbol < self.numsymbols:
 			return
 		else:
+			print self.numsymbols
 			raise ValueError("Symbol out of range")
 	
 	# Returns a string representation of this frequency table. The format is subject to change.
@@ -433,6 +434,7 @@ class SimpleFrequencyTable(FrequencyTable):
 		if 0 <= symbol < len(self.frequencies):
 			return
 		else:
+			print len(self.frequencies)
 			raise ValueError("Symbol out of range")
 	
 	
@@ -444,7 +446,62 @@ class SimpleFrequencyTable(FrequencyTable):
 			result += "{}\t{}\n".format(i, freq)
 		return result
 
-
+class ContextFrequencyTable(FrequencyTable):
+	
+	# Constructs a flat frequency table with the given number of symbols.
+	def __init__(self, pmf):
+		self.pmf = pmf
+		self.numsymbols = len(pmf) # Total number of symbols
+		if self.numsymbols < 1:
+			raise ValueError("Number of symbols must be positive")
+	
+	# Returns the number of symbols in this table
+	def get_symbol_limit(self):
+		return self.numsymbols
+	
+	# Returns the frequency of the given symbol
+	def get(self, symbol):
+		self._check_symbol(symbol)
+		return pmf[symbol]
+	
+	# Returns the total of all symbol frequencies
+	def get_total(self):
+		return sum(self.pmf)
+	
+	# Returns the sum of the frequencies of all the symbols strictly below
+	# the given symbol value. The returned value is equal to 'symbol'.
+	def get_low(self, symbol):
+		self._check_symbol(symbol)
+		return sum(self.pmf[:symbol])
+	
+	
+	# Returns the sum of the frequencies of the given symbol and all
+	# the symbols below. The returned value is equal to 'symbol' + 1.
+	def get_high(self, symbol):
+		self._check_symbol(symbol)
+		return sum(self.pmf[:symbol]) + self.pmf[symbol]
+	
+	
+	# Returns silently if 0 <= symbol < numsymbols, otherwise raises an exception.
+	def _check_symbol(self, symbol):
+		if 0 <= symbol < self.numsymbols:
+			return
+		else:
+			print symbol,self.numsymbols
+			raise ValueError("Symbol out of range")
+	
+	# Returns a string representation of this frequency table. The format is subject to change.
+	def __str__(self):
+		return "FlatFrequencyTable={}".format(self.numsymbols)
+	
+	# Unsupported operation, because this frequency table is immutable.
+	def set(self, symbol, freq):
+		raise NotImplementedError()
+	
+	# Unsupported operation, because this frequency table is immutable.
+	def increment(self, pmf):
+		##need to do something
+		self.pmf = pmf
 
 # A wrapper that checks the preconditions (arguments) and postconditions (return value) of all
 # the frequency table methods. Useful for finding faults in a frequency table implementation.
