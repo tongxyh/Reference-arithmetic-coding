@@ -10,6 +10,7 @@ and does not target the best speed/memory/performance.
 
 Home page with detailed description: [https://www.nayuki.io/page/reference-arithmetic-coding](https://www.nayuki.io/page/reference-arithmetic-coding)
 
+The 'pmf' should be a pure python instance (which means it's not from any other package like numpy)
 
 License
 -------
