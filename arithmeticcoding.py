@@ -186,6 +186,7 @@ class ArithmeticDecoder(ArithmeticCoderBase):
 		range = self.high - self.low + 1
 		offset = self.code - self.low
 		value = ((offset + 1) * total - 1) // range
+		print (value,offset,self.code,total)
 		assert value * range // total <= offset
 		assert 0 <= value < total
 		
@@ -311,7 +312,7 @@ class FlatFrequencyTable(FrequencyTable):
 		if 0 <= symbol < self.numsymbols:
 			return
 		else:
-			print self.numsymbols
+			print (self.numsymbols)
 			raise ValueError("Symbol out of range")
 	
 	# Returns a string representation of this frequency table. The format is subject to change.
@@ -434,7 +435,7 @@ class SimpleFrequencyTable(FrequencyTable):
 		if 0 <= symbol < len(self.frequencies):
 			return
 		else:
-			print len(self.frequencies)
+			print (len(self.frequencies))
 			raise ValueError("Symbol out of range")
 	
 	
@@ -487,7 +488,7 @@ class ContextFrequencyTable(FrequencyTable):
 		if 0 <= symbol < self.numsymbols:
 			return
 		else:
-			print symbol,self.numsymbols
+			print (symbol,self.numsymbols)
 			raise ValueError("Symbol out of range")
 	
 	# Returns a string representation of this frequency table. The format is subject to change.

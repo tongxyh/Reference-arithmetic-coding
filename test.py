@@ -34,9 +34,9 @@ def main(binfile):
 		out = decompress(bitin)
 	
 	bpp = 1.0*-np.log(0.1)/np.log(2.0) + 9.0*-np.log(0.1)/np.log(2.0)+1.0*-np.log(0.3)/np.log(2.0)
-	print bpp/8.0,"bytes"
+	print (bpp/8.0,"bytes")
 
-	print inp,out
+	print (inp,out)
 
 def pmf_quantization(pmf,precision=16):
 	pmf = [int(i*(2**16)) for i in pmf]
